@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,21 +13,14 @@ namespace Chessington.GameEngine.Pieces
         {
             var square = board.FindPiece(this);
 
-            var moves = new[] { -1, 0, 1 };
+            // Really poor name
+            var vectors = new[] { -1, 0, 1 };
 
-            return moves
-                .SelectMany(foo => moves,
-                    (i, j) => Square.At(square.Row + i, square.Col + j)
-                )
-                .Where(s => {
-                    if (s == square || !s.IsOnTheBoard()) return false;
+            var directions = vectors
+                .SelectMany(foo => vectors, Tuple.Create)
+                .Where(tuple => !tuple.Equals(Tuple.Create(0, 0)));
 
-                    var pieceAtDestSquare = board.GetPiece(s);
-
-                    if (pieceAtDestSquare == null) return true;
-
-                    return pieceAtDestSquare.Player != Player;
-                });
+            return GetAvailableMovesWithDirection(square, board, directions, true);
         }
     }
 }

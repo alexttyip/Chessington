@@ -22,7 +22,9 @@ namespace Chessington.GameEngine.Pieces
             board.MovePiece(currentSquare, newSquare);
         }
 
-        protected IEnumerable<Square> GetAvailableMovesWithDirection(Square square, Board board, IEnumerable<Tuple<int, int>> directions)
+        /// This function takes in the "directions" of a piece and traverse along those directions
+        /// The legal moves are then returned.
+        protected IEnumerable<Square> GetAvailableMovesWithDirection(Square square, Board board, IEnumerable<Tuple<int, int>> directions, bool isKing = false)
         {
             var output = new List<Square>();
             foreach(var direction in directions) {
@@ -40,6 +42,9 @@ namespace Chessington.GameEngine.Pieces
                     }
 
                     output.Add(fooSquare);
+
+                    if (isKing)
+                        break;
 
                     row += direction.Item1;
                     col += direction.Item2;
