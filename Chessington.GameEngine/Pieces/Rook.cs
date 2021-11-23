@@ -13,7 +13,6 @@ namespace Chessington.GameEngine.Pieces
         {
             var square = board.FindPiece(this);
 
-            // Diagonals
             // Really poor name
             var vectors = new[] { -1, 0, 1 };
 

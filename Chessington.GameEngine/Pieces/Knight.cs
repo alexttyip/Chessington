@@ -14,23 +14,19 @@ namespace Chessington.GameEngine.Pieces
             var output = new List<Square>();
             var square = board.FindPiece(this);
 
-            var longOffsets = new[] { -2, 2 };
-            var shortOffsets = new[] { -1, 1 };
+            var signs = new[] { -1, 1 };
+            var signPairs = signs.SelectMany(foo => signs, Tuple.Create);
+            var magnitudes = new[] { Tuple.Create(1, 2), Tuple.Create(2, 1) };
 
-            var offsets = longOffsets.SelectMany(
-                foo => shortOffsets,
-                Tuple.Create
+            var offsets = signPairs.SelectMany(
+                foo => magnitudes,
+                (sign, magnitude) =>
+                    Tuple.Create(sign.Item1 * magnitude.Item1, sign.Item2 * magnitude.Item2)
             ).ToList();
 
             output.AddRange(
                 offsets.Select(tuple =>
                     Square.At(square.Row + tuple.Item1, square.Col + tuple.Item2)
-                ).Where(fooSquare => IsKnightMoveLegal(fooSquare, board))
-            );
-
-            output.AddRange(
-                offsets.Select(tuple =>
-                    Square.At(square.Row + tuple.Item2, square.Col + tuple.Item1)
                 ).Where(fooSquare => IsKnightMoveLegal(fooSquare, board))
             );
 
