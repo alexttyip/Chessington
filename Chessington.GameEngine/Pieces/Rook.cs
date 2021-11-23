@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Chessington.GameEngine.Pieces
 {
@@ -17,6 +16,7 @@ namespace Chessington.GameEngine.Pieces
             for (var i = 0; i < 8; i++)
                 output.Add(Square.At(square.Row, i));
 
+            // Fill column
             for (var i = 0; i < 8; i++)
                 output.Add(Square.At(i, square.Col));
 

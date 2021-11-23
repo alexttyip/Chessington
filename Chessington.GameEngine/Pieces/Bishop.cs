@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Chessington.GameEngine.Pieces
 {
@@ -13,6 +12,7 @@ namespace Chessington.GameEngine.Pieces
             var output = new List<Square>();
             var square = board.FindPiece(this);
 
+            // Diagonals
             for (var i = 0; i < 8; i++)
                 output.Add(Square.At(i, i));
 
