@@ -18,7 +18,7 @@ namespace Chessington.GameEngine.Pieces
                 .SelectMany(foo => moves,
                     (i, j) =>  Square.At(square.Row + i, square.Col + j)
                 )
-                .Where(s => s != square);
+                .Where(s => s != square && s.IsOnTheBoard());
         }
     }
 }

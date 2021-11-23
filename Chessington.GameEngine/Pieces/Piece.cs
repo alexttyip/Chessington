@@ -28,7 +28,7 @@ namespace Chessington.GameEngine.Pieces
                 var row = square.Row + direction.Item1;
                 var col = square.Col + direction.Item2;
 
-                while (0 <= row && row < 8 && 0 <= col && col < 8) {
+                while (Square.At(row, col).IsOnTheBoard()) {
                     var fooSquare = Square.At(row, col);
 
                     if (board.IsOccupied(fooSquare)) break;

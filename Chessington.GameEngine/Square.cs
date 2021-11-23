@@ -16,6 +16,11 @@
             return new Square(row, col);
         }
 
+        public bool IsOnTheBoard()
+        {
+            return 0 <= Row && Row < 8 && 0 <= Col && Col < 8;
+        }
+
         public bool Equals(Square other)
         {
             return Row == other.Row && Col == other.Col;
@@ -29,8 +34,7 @@
 
         public override int GetHashCode()
         {
-            unchecked
-            {
+            unchecked {
                 return (Row * 397) ^ Col;
             }
         }
