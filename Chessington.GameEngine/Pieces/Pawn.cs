@@ -16,7 +16,7 @@ namespace Chessington.GameEngine.Pieces
             var playerSign = Player == Player.White ? -1 : 1;
 
             var oneSquareAhead = Square.At(square.Row + 1 * playerSign, square.Col);
-            if (board.GetPiece(oneSquareAhead) != null) {
+            if (board.IsOccupied(oneSquareAhead)) {
                 // Square ahead is occupied
                 return output;
             }
@@ -31,7 +31,7 @@ namespace Chessington.GameEngine.Pieces
             var twoSquaresAhead = Square.At(square.Row + 2 * playerSign, square.Col);
 
             // Two squares ahead is occupied
-            if (board.GetPiece(twoSquaresAhead) != null) return output;
+            if (board.IsOccupied(twoSquaresAhead)) return output;
 
             output.Add(twoSquaresAhead);
 
