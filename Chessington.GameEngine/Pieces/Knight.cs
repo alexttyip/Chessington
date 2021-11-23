@@ -41,9 +41,11 @@ namespace Chessington.GameEngine.Pieces
         {
             if (!square.IsOnTheBoard()) return false;
 
-            if (board.GetPiece(square) == null) return true;
+            var pieceAtDestSquare = board.GetPiece(square);
 
-            return board.GetPiece(square).Player != Player;
+            if (pieceAtDestSquare == null) return true;
+
+            return pieceAtDestSquare.Player != Player;
         }
     }
 }
