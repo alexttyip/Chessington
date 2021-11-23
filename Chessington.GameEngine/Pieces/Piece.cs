@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Chessington.GameEngine.Pieces
 {
@@ -21,7 +22,7 @@ namespace Chessington.GameEngine.Pieces
             board.MovePiece(currentSquare, newSquare);
         }
 
-        protected static IEnumerable<Square> GetAvailableMovesWithDirection(Square square, Board board, IEnumerable<Tuple<int, int>> directions)
+        protected IEnumerable<Square> GetAvailableMovesWithDirection(Square square, Board board, IEnumerable<Tuple<int, int>> directions)
         {
             var output = new List<Square>();
             foreach(var direction in directions) {
@@ -31,7 +32,12 @@ namespace Chessington.GameEngine.Pieces
                 while (Square.At(row, col).IsOnTheBoard()) {
                     var fooSquare = Square.At(row, col);
 
-                    if (board.IsOccupied(fooSquare)) break;
+                    if (board.IsOccupied(fooSquare)) {
+                        if (board.GetPiece(fooSquare).Player != Player)
+                            output.Add(fooSquare);
+
+                        break;
+                    }
 
                     output.Add(fooSquare);
 
