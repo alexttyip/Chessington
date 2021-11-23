@@ -11,7 +11,6 @@ namespace Chessington.GameEngine.Pieces
         public override IEnumerable<Square> GetAvailableMoves(Board board)
         {
             var output = new List<Square>();
-
             var square = board.FindPiece(this);
 
             // Fill row
